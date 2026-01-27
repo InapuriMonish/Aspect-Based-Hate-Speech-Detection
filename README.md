@@ -1,137 +1,17 @@
-#Aspect-Based Hate Speech Detection using Transformers
+# Aspect-Based Hate Speech Detection
 
-This project implements an **aspect-based hate speech detection system** using a Transformer-based deep learning model.  
-Unlike binary toxic/non-toxic classification, this system predicts **multiple hate-related aspects simultaneously**.
+This project implements an aspect-based hate speech detection system using a Transformer-based deep learning model. Instead of performing only binary toxic or non-toxic classification, the system predicts multiple hate-related aspects present in a single piece of text.
 
-The model is trained and evaluated on the **Jigsaw Toxic Comment Classification Dataset** and supports **GPU-accelerated training and inference**.
+The task is formulated as a multi-label classification problem, where each comment can belong to more than one hate category at the same time. This allows the system to distinguish between different types of harmful content such as insults, obscenity, threats, and identity-based hate.
 
----
+The model is based on RoBERTa, a Transformer architecture pretrained on large-scale text corpora. Input text is tokenized and passed through the Transformer encoder, followed by a classification head that outputs independent probabilities for each label using a sigmoid activation function. Binary Cross-Entropy with Logits loss is used during training to handle the multi-label nature of the task. Training and inference are performed using GPU acceleration with CUDA, along with mixed precision training and gradient clipping for efficiency and stability.
 
-## 🔍 Problem Statement
-Online moderation systems must identify not only whether text is harmful, but **what kind of harm it contains**.  
-A single comment may include insults, obscenity, threats, or identity-based hate.
+The dataset used for this project is the Jigsaw Toxic Comment Classification dataset, which contains approximately 160,000 user-generated comments. Each comment is annotated with six labels: toxic, severe_toxic, obscene, threat, insult, and identity_hate. Only the training portion of the dataset is used for model development and evaluation.
 
-This project addresses this by performing **multi-label classification**, where each comment can belong to multiple hate aspects.
+After training, the model achieves strong performance on the validation set, with a weighted F1-score of approximately 0.76, weighted precision of approximately 0.77, weighted recall of approximately 0.78, and a weighted ROC-AUC close to 0.99. The model performs particularly well on frequent labels such as toxic, obscene, and insult. Lower recall on rare labels such as threat and identity_hate is primarily due to class imbalance in the dataset rather than insufficient training.
 
----
+The system supports inference on custom user input, producing per-label probabilities and identifying the primary toxic aspect when present. Clean text inputs are correctly classified as non-toxic, while harmful inputs are accurately flagged with appropriate aspect labels.
 
-## 🧠 Model & Approach
+This project demonstrates the effectiveness of Transformer-based models for fine-grained hate speech detection and highlights the advantages of aspect-based analysis over simple binary toxicity classification.
 
-- **Model**: RoBERTa (Transformer-based)
-- **Task**: Multi-label text classification
-- **Loss Function**: Binary Cross-Entropy with Logits
-- **Activation**: Sigmoid (per-label probability)
-- **Training**: GPU-accelerated (CUDA)
-- **Optimization**:
-  - Mixed Precision Training (AMP)
-  - Gradient Clipping
-  - Validation-based checkpointing
-
----
-
-## 📊 Dataset
-
-**Jigsaw Toxic Comment Classification Dataset**
-- ~160,000 user comments
-- Aspect labels:
-  - `toxic`
-  - `severe_toxic`
-  - `obscene`
-  - `threat`
-  - `insult`
-  - `identity_hate`
-
-Only `train.csv` is used.
-
----
-
-## 📁 Repository Structure
-
-hate-speech-aspect-detection/
-│
-├── data/
-│ └── train.csv
-│
-├── eval_results/
-│ ├── classification_report.json
-│ ├── confusion_matrices.png
-│ ├── evaluation_summary.txt
-│ ├── full_results.json
-│ ├── metrics.json
-│ ├── per_label_metrics.png
-│ └── threshold_analysis.png
-│
-├── models/
-│ ├── best_model.pt
-│ ├── config.json
-│ └── metrics.json
-│
-├── src/
-│ ├── preprocess.py
-│ ├── train.py
-│ ├── evaluate.py
-│ └── predict.py
-│
-├── .gitignore
-├── README.md
-└── requirements.txt
-
-
----
-
-## ⚙️ Environment Setup
-
-### Recommended
-- Python **3.9 – 3.11**
-- CUDA-enabled GPU (tested on RTX 3060)
-- Conda or virtual environment
-
-### Install dependencies
-```bash
-pip install -r requirements.txt
-▶️ Run Order
-1. (Optional) Data sanity check
-python src/preprocess.py
-2. Train the model
-python src/train.py
-Best model saved to models/best_model.pt
-
-3. Evaluate performance
-python src/evaluate.py
-Metrics and plots saved in eval_results/
-
-4. Run inference (demo)
-python src/predict.py
-📈 Results Summary
-F1-score (Weighted): ~0.76
-
-Precision (Weighted): ~0.77
-
-Recall (Weighted): ~0.78
-
-ROC-AUC (Weighted): ~0.99
-
-Hamming Loss: ~0.016
-
-High-frequency labels (toxic, obscene, insult) show strong performance.
-Lower recall on rare labels (threat, identity_hate) is primarily due to class imbalance, not under-training.
-
-🎯 Key Observations
-The model accurately distinguishes profanity from identity-based hate
-
-Clean inputs are not falsely flagged
-
-Threshold tuning confirms optimal performance near 0.5
-
-Additional epochs show diminishing returns
-
-🚀 Future Work
-Class-imbalance handling (Focal Loss, reweighting)
-
-Class-wise threshold tuning
-
-Multilingual hate speech detection
-
-Speech-to-text hate detection
-
-Web deployment (Streamlit / Flask)
+Academic project on Aspect-Based Hate Speech Detection using Deep Learning and Transformers.
