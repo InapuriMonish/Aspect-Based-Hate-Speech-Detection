@@ -1,0 +1,87 @@
+{
+  "overall": {
+    "hamming_loss": 0.01653298241216527,
+    "subset_accuracy": 0.9211054016794085,
+    "jaccard_score": 0.06294126248067844,
+    "f1_macro": 0.5512121253979864,
+    "precision_macro": 0.693670846166277,
+    "recall_macro": 0.5510490557017271,
+    "f1_micro": 0.7717375630857967,
+    "precision_micro": 0.7654462242562929,
+    "recall_micro": 0.7781331782494911,
+    "f1_weighted": 0.7599752092153638,
+    "precision_weighted": 0.7746432053288301,
+    "recall_weighted": 0.7781331782494911,
+    "roc_auc_macro": 0.9883692050930643,
+    "roc_auc_weighted": 0.9886354143042753
+  },
+  "per_label": {
+    "toxic": {
+      "f1": 0.8232633279483037,
+      "precision": 0.7888544891640867,
+      "recall": 0.8608108108108108,
+      "support": 1480,
+      "true_positives": 1274,
+      "false_positives": 341,
+      "false_negatives": 206,
+      "true_negatives": 14137,
+      "roc_auc": 0.9862816090022887
+    },
+    "severe_toxic": {
+      "f1": 0.47802197802197804,
+      "precision": 0.4027777777777778,
+      "recall": 0.5878378378378378,
+      "support": 148,
+      "true_positives": 87,
+      "false_positives": 129,
+      "false_negatives": 61,
+      "true_negatives": 15681,
+      "roc_auc": 0.9912482691420073
+    },
+    "obscene": {
+      "f1": 0.8291488058787507,
+      "precision": 0.849435382685069,
+      "recall": 0.8098086124401914,
+      "support": 836,
+      "true_positives": 677,
+      "false_positives": 120,
+      "false_negatives": 159,
+      "true_negatives": 15002,
+      "roc_auc": 0.9936655947891756
+    },
+    "threat": {
+      "f1": 0.28,
+      "precision": 0.5384615384615384,
+      "recall": 0.1891891891891892,
+      "support": 37,
+      "true_positives": 7,
+      "false_positives": 6,
+      "false_negatives": 30,
+      "true_negatives": 15915,
+      "roc_auc": 0.9906990087883248
+    },
+    "insult": {
+      "f1": 0.7593386405388854,
+      "precision": 0.7363420427553444,
+      "recall": 0.7838179519595448,
+      "support": 791,
+      "true_positives": 620,
+      "false_positives": 222,
+      "false_negatives": 171,
+      "true_negatives": 14945,
+      "roc_auc": 0.9888388415964294
+    },
+    "identity_hate": {
+      "f1": 0.1375,
+      "precision": 0.8461538461538461,
+      "recall": 0.07482993197278912,
+      "support": 147,
+      "true_positives": 11,
+      "false_positives": 2,
+      "false_negatives": 136,
+      "true_negatives": 15809,
+      "roc_auc": 0.9794819072401588
+    }
+  },
+  "threshold": 0.5
+}

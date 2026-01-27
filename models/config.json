@@ -1,0 +1,24 @@
+{
+  "data_path": "../data/train.csv",
+  "model_name": "roberta-base",
+  "output_dir": "../models",
+  "batch_size": 32,
+  "max_len": 128,
+  "epochs": 3,
+  "warmup_steps": 500,
+  "weight_decay": 0.01,
+  "lr": 2e-05,
+  "seed": 42,
+  "gradient_accumulation_steps": 2,
+  "max_grad_norm": 1.0,
+  "val_split": 0.1,
+  "test_split": 0.1,
+  "label_cols": [
+    "toxic",
+    "severe_toxic",
+    "obscene",
+    "threat",
+    "insult",
+    "identity_hate"
+  ]
+}
